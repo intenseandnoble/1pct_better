@@ -27,26 +27,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _baselineController = TextEditingController();
   num _baseline = 0;
   num _frequency = 1;
   num _result = 0;
 
-  void _setBaseline() {
-    _baseline = num.parse(_baselineController.text);
+  void _setBaseline(String s) {
     setState(() {
-      _computeResult();
+      _baseline = num.parse(s);
     });
+    _computeResult();
   }
 
   void _setFrequency(num value) {
     setState(() {
       _frequency = value;
-      _computeResult();
     });
+    _computeResult();
   }
 
-  void _computeResult() {}
+  void _computeResult() {
+    num qty = 1 / _frequency;
+    setState(() {
+      _result = _baseline * (1 + qty);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
                 child: TextField(
-                  controller: _baselineController,
                   decoration: InputDecoration(labelText: 'Baseline'),
                   keyboardType: TextInputType.number,
-                  onEditingComplete: () {
-                    _setBaseline();
+                  onChanged: (String s) {
+                    _setBaseline(s);
                   },
                 ),
               ),
@@ -102,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Text(
-                '$_result',
+                '${_result.toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.headline4,
               ),
             ],
