@@ -61,54 +61,56 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
-                child: TextField(
-                  decoration: InputDecoration(labelText: 'Baseline'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (String s) {
-                    _setBaseline(s);
-                  },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                  child: TextField(
+                    decoration: InputDecoration(labelText: 'Baseline'),
+                    keyboardType: TextInputType.number,
+                    onChanged: (String s) {
+                      _setBaseline(s);
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
-                child: InputDecorator(
-                  decoration: InputDecoration(labelText: 'Frequency'),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      value: _frequency,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text('Daily'),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          child: Text('Weekly'),
-                          value: 7,
-                        ),
-                        DropdownMenuItem(
-                          child: Text('Monthly (30 days)'),
-                          value: 30,
-                        ),
-                      ],
-                      onChanged: (num? v) {
-                        _setFrequency(v!);
-                      },
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                  child: InputDecorator(
+                    decoration: InputDecoration(labelText: 'Frequency'),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        value: _frequency,
+                        items: [
+                          DropdownMenuItem(
+                            child: Text('Daily'),
+                            value: 1,
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Weekly'),
+                            value: 7,
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Monthly (30 days)'),
+                            value: 30,
+                          ),
+                        ],
+                        onChanged: (num? v) {
+                          _setFrequency(v!);
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Text(
-                '${_result.toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+                Text(
+                  '${_result.toStringAsFixed(2)}',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
           ),
         ),
       ),
